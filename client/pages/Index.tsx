@@ -33,7 +33,7 @@ const HERO_SLIDES = [
     sub: "Custom interiors, kitchens, bathrooms, and full-home renovations crafted to your exact vision.",
     cta: "View Our Work",
     ctaHref: "#services",
-    image: "/images/slide-8.webp",
+    image: "/images/slide-8.png",
   },
   {
     tag: "Heavy Construction",
