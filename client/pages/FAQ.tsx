@@ -285,11 +285,15 @@ export default function FAQ() {
 
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section style={{ position: "relative", background: "var(--ink)", paddingTop: "var(--header-h, 102px)", overflow: "hidden" }}>
-        <div style={{
-          position: "absolute", inset: 0,
-          backgroundImage: "url('/images/slide-1.png')",
-          backgroundSize: "cover", backgroundPosition: "center 60%",
-        }} />
+       <div
+  style={{
+    position: "absolute",
+    inset: 0,
+    backgroundImage: "url('/images/faqs-pic.png')",
+    backgroundSize: "cover",
+    backgroundPosition: "center 60%",
+  }}
+/>
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.88) 0%, rgba(10,10,10,0.96) 100%)" }} />
         {/* Gold rule bottom */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1.5, background: "linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent)" }} />
