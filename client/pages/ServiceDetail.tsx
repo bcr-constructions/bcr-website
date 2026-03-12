@@ -194,6 +194,23 @@ export default function ServiceDetail() {
   const { service } = useParams();
   const [expandedFaq, setExpandedFaq] = useState<number | null>(0);
 
+  // Contact form state
+  const [sdForm, setSdForm] = useState({ firstName: "", lastName: "", email: "", phone: "", service: "", message: "" });
+  const [sdStatus, setSdStatus] = useState<"idle" | "submitting" | "success">("idle");
+
+  const handleSdChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setSdForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSdSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!sdForm.firstName || !sdForm.email || !sdForm.phone) return;
+    setSdStatus("submitting");
+    await new Promise(res => setTimeout(res, 1200));
+    setSdStatus("success");
+    setSdForm({ firstName: "", lastName: "", email: "", phone: "", service: "", message: "" });
+  };
+
   const serviceKey = service?.toLowerCase().replace(/\s+/g, "-") || "";
   const data = SERVICE_DATA[serviceKey];
 
@@ -352,6 +369,13 @@ export default function ServiceDetail() {
           margin-top: 0;
         }
 
+                /* ── responsive grids ── */
+        @media (max-width: 768px) {
+          .responsive-2col { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .responsive-form-grid { grid-template-columns: 1fr !important; }
+          .responsive-4col { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+
         /* stat card */
         .sd-stat {
           padding: 28px 24px; border-radius: 16px;
@@ -490,7 +514,7 @@ export default function ServiceDetail() {
 
       {/* ── OVERVIEW + BENEFITS ────────────────────────────────────────── */}
       <section style={{ background: "#fff", padding: "96px clamp(24px,6vw,96px)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
+        <div className="responsive-2col" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
 
           {/* Left — overview */}
           <Reveal>
@@ -623,7 +647,7 @@ export default function ServiceDetail() {
         <div style={{ position: "absolute", bottom: -100, left: -50, width: 380, height: 380, background: "radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
 
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
+          <div className="responsive-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
 
             {/* Left */}
             <Reveal>
@@ -657,14 +681,24 @@ export default function ServiceDetail() {
               <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 20, padding: "40px 36px", backdropFilter: "blur(8px)" }}>
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, fontWeight: 600, color: "#fff", marginBottom: 6 }}>Get a Free Quote</h3>
                 <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.4)", marginBottom: 28, lineHeight: 1.6 }}>We respond within 1 business day — usually sooner.</p>
-                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                    <input className="sd-input" type="text" placeholder="First Name" />
-                    <input className="sd-input" type="text" placeholder="Last Name" />
+                {sdStatus === "success" ? (
+                  <div style={{ textAlign: "center", padding: "48px 24px" }}>
+                    <div style={{ width: 56, height: 56, borderRadius: "50%", background: "rgba(201,168,76,0.15)", border: "1px solid rgba(201,168,76,0.4)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <h4 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 600, color: "#fff", marginBottom: 10 }}>Request Received!</h4>
+                    <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 24 }}>We'll be in touch within one business day.</p>
+                    <button onClick={() => setSdStatus("idle")} style={{ fontSize: 13, color: "var(--gold)", background: "none", border: "none", cursor: "pointer", textDecoration: "underline" }}>Submit another request</button>
                   </div>
-                  <input className="sd-input" type="email" placeholder="Email Address" />
-                  <input className="sd-input" type="tel" placeholder="Phone Number" />
-                  <select className="sd-input" defaultValue={data.title} style={{ appearance: "none" }}>
+                ) : (
+                <form onSubmit={handleSdSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div className="responsive-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                    <input className="sd-input" type="text" name="firstName" placeholder="First Name *" value={sdForm.firstName} onChange={handleSdChange} required />
+                    <input className="sd-input" type="text" name="lastName"  placeholder="Last Name"    value={sdForm.lastName}  onChange={handleSdChange} />
+                  </div>
+                  <input className="sd-input" type="email" name="email" placeholder="Email Address *" value={sdForm.email} onChange={handleSdChange} required />
+                  <input className="sd-input" type="tel"   name="phone" placeholder="Phone Number *"  value={sdForm.phone} onChange={handleSdChange} required />
+                  <select className="sd-input" name="service" value={sdForm.service || data.title.replace(/&amp;/g, "&")} onChange={handleSdChange} style={{ appearance: "none" }}>
                     <option value="" disabled>Type of Service</option>
                     <option>Commercial Restoration</option>
                     <option>Condominium</option>
@@ -674,18 +708,21 @@ export default function ServiceDetail() {
                     <option>Home Renovation</option>
                     <option>Insurance Claim</option>
                     <option>Interior Renovation</option>
-                    <option>Kitchen &amp; Bathroom</option>
+                    <option>Kitchen & Bathroom</option>
                     <option>New / Custom Home</option>
                     <option>Roofing</option>
                     <option>Water Proofing</option>
                     <option>Other / Not Sure</option>
                   </select>
-                  <textarea className="sd-input" rows={4} placeholder="Tell us about your project — location, scope, timeline..." style={{ resize: "vertical" }} />
-                  <button className="sd-submit"><span>Send My Request →</span></button>
+                  <textarea className="sd-input" name="message" rows={4} placeholder="Tell us about your project — location, scope, timeline..." value={sdForm.message} onChange={handleSdChange} style={{ resize: "vertical" }} />
+                  <button className="sd-submit" type="submit" disabled={sdStatus === "submitting"}>
+                    <span>{sdStatus === "submitting" ? "Sending…" : "Send My Request →"}</span>
+                  </button>
                   <p style={{ fontSize: 11.5, color: "rgba(255,255,255,0.3)", textAlign: "center", lineHeight: 1.6 }}>
                     We never share your information. You'll hear from us within 1 business day.
                   </p>
-                </div>
+                </form>
+                )}
               </div>
             </Reveal>
           </div>
