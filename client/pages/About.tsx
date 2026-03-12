@@ -225,7 +225,7 @@ export default function About() {
         {/* Background image */}
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "url('https://cdn.builder.io/api/v1/image/assets%2F073d05d262c84cc181e4182325be69b5%2F08b49164b9854b449840e31a08b51dbc?format=webp&width=800&height=1200')",
+          backgroundImage:"url('/images/about us pic.png')",
           backgroundSize: "cover", backgroundPosition: "center 40%",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(105deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.4) 100%)" }} />
