@@ -267,7 +267,7 @@ export default function Staff() {
       <section style={{ position: "relative", minHeight: 520, background: "#000", paddingTop: "var(--header-h, 102px)", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "/images/team pic 1",
+          backgroundImage: "/images/team pic 1.png",
           backgroundSize: "cover",
           backgroundPosition: "center 30%",
         }} />
