@@ -17,7 +17,7 @@ const HERO_SLIDES = [
     sub: "Full-service general contracting across New York — residential, commercial, and everything in between.",
     cta: "Get a Free Quote",
     ctaHref: "#contact",
-    image: "/images/slide-1.webp",
+    image: "/images/slide-6.webp",
   },
   {
     tag: "Commercial Excellence",
