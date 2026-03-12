@@ -161,7 +161,7 @@ export default function FAQ() {
   return (
     <div style={{ fontFamily: "'Outfit', sans-serif", background: "#fff", overflowX: "hidden" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Outfit:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');  
 
         :root {
           --gold:    #C9A84C;
@@ -287,7 +287,7 @@ export default function FAQ() {
       <section style={{ position: "relative", background: "var(--ink)", paddingTop: "var(--header-h, 102px)", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "url('https://cdn.builder.io/api/v1/image/assets%2F073d05d262c84cc181e4182325be69b5%2F08b49164b9854b449840e31a08b51dbc?format=webp&width=800&height=1200')",
+          backgroundImage: "url('/images/faqs pic.png')",
           backgroundSize: "cover", backgroundPosition: "center 60%",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.88) 0%, rgba(10,10,10,0.96) 100%)" }} />
