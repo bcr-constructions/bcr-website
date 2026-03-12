@@ -267,8 +267,9 @@ export default function Staff() {
       <section style={{ position: "relative", minHeight: 520, background: "#000", paddingTop: "var(--header-h, 102px)", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "url('https://cdn.builder.io/api/v1/image/assets%2F073d05d262c84cc181e4182325be69b5%2F08b49164b9854b449840e31a08b51dbc?format=webp&width=800&height=1200')",
-          backgroundSize: "cover", backgroundPosition: "center 30%",
+          backgroundImage: "/images/team pic 1.png",
+          backgroundSize: "cover",
+          backgroundPosition: "center 30%",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(105deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.60) 60%, rgba(0,0,0,0.3) 100%)" }} />
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, var(--gold,#C9A84C) 0%, rgba(201,168,76,0.2) 70%, transparent 100%)" }} />
