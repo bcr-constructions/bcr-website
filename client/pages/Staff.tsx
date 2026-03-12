@@ -155,6 +155,13 @@ export default function Staff() {
           color: var(--ink); line-height: 1.1; margin-bottom: 16px;
         }
 
+                /* ── responsive grids ── */
+        @media (max-width: 768px) {
+          .responsive-2col { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .responsive-form-grid { grid-template-columns: 1fr !important; }
+          .responsive-4col { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+
         /* role card */
         .role-card {
           border: 1px solid var(--border); border-radius: 20px;
@@ -267,7 +274,7 @@ export default function Staff() {
       <section style={{ position: "relative", minHeight: 520, background: "#000", paddingTop: "var(--header-h, 102px)", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "/images/team pic 1.png",
+          backgroundImage: "url('/images/team pic 1.png')",
           backgroundSize: "cover",
           backgroundPosition: "center 30%",
         }} />
@@ -310,7 +317,7 @@ export default function Staff() {
 
       {/* ── INTRO ─────────────────────────────────────────────────────── */}
       <section style={{ background: "#fff", padding: "96px clamp(24px,6vw,96px)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div className="responsive-2col" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
           <Reveal>
             <div className="st-eyebrow">Who We Are</div>
             <h2 className="st-sec-title">A Crew You Can Put Your Name On</h2>
@@ -424,11 +431,11 @@ export default function Staff() {
       <section style={{ position: "relative", padding: "96px clamp(24px,6vw,96px)", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "/images/team pic 2.png",
+          backgroundImage: "url('https://cdn.builder.io/api/v1/image/assets%2F073d05d262c84cc181e4182325be69b5%2F5a045426e9834c1083837830191b43dd?format=webp&width=800&height=1200')",
           backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.70) 100%)" }} />
-        <div style={{ position: "relative", zIndex: 10, maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div className="responsive-2col" style={{ position: "relative", zIndex: 10, maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
 
           <Reveal>
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.22em", textTransform: "uppercase", color: "#C9A84C", marginBottom: 18 }}>Our Team Commitment</div>
