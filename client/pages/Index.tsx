@@ -135,8 +135,25 @@ function Section({ children, className = "" }: { children: React.ReactNode; clas
 export default function Index() {
   const [slide, setSlide] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
   const [autoPaused, setAutoPaused] = useState(false);
+
+  // Contact form state
+  const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", service: "", message: "" });
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.firstName || !formData.email || !formData.phone) return;
+    setFormStatus("submitting");
+    // Replace with your real API/email endpoint
+    await new Promise(res => setTimeout(res, 1200));
+    setFormStatus("success");
+    setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "", message: "" });
+  };
   const prev = () => setSlide(p => p === 0 ? HERO_SLIDES.length - 1 : p - 1);
   const next = () => setSlide(p => (p + 1) % HERO_SLIDES.length);
 
@@ -395,6 +412,13 @@ export default function Index() {
           color: var(--gold); flex-shrink: 0; margin-top: 1px;
         }
 
+        /* ── responsive grids ── */
+        @media (max-width: 768px) {
+          .responsive-2col { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .responsive-form-grid { grid-template-columns: 1fr !important; }
+          .hero-title { font-size: clamp(36px, 10vw, 60px) !important; }
+        }
+
         /* ── why bcr checklist ── */
         .why-item {
           display: flex; align-items: center; gap: 12px;
@@ -498,7 +522,7 @@ export default function Index() {
 
       {/* ── ABOUT / NARRATIVE ─────────────────────────────────────────── */}
       <section style={{ padding: "96px clamp(24px,6vw,96px)", background: "#fff", maxWidth: 1280, margin: "0 auto" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div className="responsive-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
           <Section>
             <div className="sec-eyebrow">About BCR Constructions</div>
             <h2 className="sec-title">New York's Most Trusted Construction Partner</h2>
@@ -718,7 +742,7 @@ export default function Index() {
         <div style={{ position: "absolute", bottom: -100, left: -100, width: 400, height: 400, background: "radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
 
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
+          <div className="responsive-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
 
             {/* Left */}
             <Section>
@@ -776,14 +800,24 @@ export default function Index() {
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, fontWeight: 600, color: "#fff", marginBottom: 6 }}>Get a Free Quote</h3>
                 <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.4)", marginBottom: 28, lineHeight: 1.6 }}>We respond within 1 business day — usually sooner.</p>
 
-                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                    <input className="contact-input" type="text"  placeholder="First Name" />
-                    <input className="contact-input" type="text"  placeholder="Last Name" />
+                {formStatus === "success" ? (
+                  <div style={{ textAlign: "center", padding: "48px 24px" }}>
+                    <div style={{ width: 56, height: 56, borderRadius: "50%", background: "rgba(201,168,76,0.15)", border: "1px solid rgba(201,168,76,0.4)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <h4 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 600, color: "#fff", marginBottom: 10 }}>Request Received!</h4>
+                    <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: 24 }}>We'll be in touch within one business day.</p>
+                    <button onClick={() => setFormStatus("idle")} style={{ fontSize: 13, color: "var(--gold)", background: "none", border: "none", cursor: "pointer", textDecoration: "underline" }}>Submit another request</button>
                   </div>
-                  <input className="contact-input" type="email" placeholder="Email Address" />
-                  <input className="contact-input" type="tel"   placeholder="Phone Number" />
-                  <select className="contact-input contact-select" defaultValue="">
+                ) : (
+                <form onSubmit={handleFormSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                  <div className="responsive-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                    <input className="contact-input" type="text" name="firstName" placeholder="First Name *" value={formData.firstName} onChange={handleFormChange} required />
+                    <input className="contact-input" type="text" name="lastName"  placeholder="Last Name"    value={formData.lastName}  onChange={handleFormChange} />
+                  </div>
+                  <input className="contact-input" type="email" name="email" placeholder="Email Address *" value={formData.email} onChange={handleFormChange} required />
+                  <input className="contact-input" type="tel"   name="phone" placeholder="Phone Number *"  value={formData.phone} onChange={handleFormChange} required />
+                  <select className="contact-input contact-select" name="service" value={formData.service} onChange={handleFormChange}>
                     <option value="" disabled>Type of Service</option>
                     <option>Commercial Restoration</option>
                     <option>Condominium</option>
@@ -801,17 +835,21 @@ export default function Index() {
                   </select>
                   <textarea
                     className="contact-input"
+                    name="message"
                     rows={4}
                     placeholder="Tell us about your project — location, scope, timeline..."
+                    value={formData.message}
+                    onChange={handleFormChange}
                     style={{ resize: "vertical" }}
                   />
-                  <button className="contact-submit">
-                    <span>Send My Request →</span>
+                  <button className="contact-submit" type="submit" disabled={formStatus === "submitting"}>
+                    <span>{formStatus === "submitting" ? "Sending…" : "Send My Request →"}</span>
                   </button>
                   <p style={{ fontSize: 11.5, color: "rgba(255,255,255,0.3)", textAlign: "center", lineHeight: 1.6 }}>
                     By submitting you agree to be contacted by BCR Constructions regarding your inquiry. We never share your information.
                   </p>
-                </div>
+                </form>
+                )}
               </div>
             </Section>
 
