@@ -50,7 +50,7 @@
   animation: ticker-scroll 40s linear infinite;
 }
 
-.hdr-ticker-track:hover {
+  .hdr-ticker-track:hover{
   animation-play-state: paused;
 }
 
