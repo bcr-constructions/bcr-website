@@ -287,7 +287,7 @@ export default function FAQ() {
       <section style={{ position: "relative", background: "var(--ink)", paddingTop: "var(--header-h, 102px)", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "url('/images/faqs pic.png')",
+          backgroundImage: "url('/images/faqs-pic.png')",
           backgroundSize: "cover", backgroundPosition: "center 60%",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.88) 0%, rgba(10,10,10,0.96) 100%)" }} />
