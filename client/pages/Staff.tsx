@@ -424,7 +424,7 @@ export default function Staff() {
       <section style={{ position: "relative", padding: "96px clamp(24px,6vw,96px)", overflow: "hidden" }}>
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "url('https://cdn.builder.io/api/v1/image/assets%2F073d05d262c84cc181e4182325be69b5%2F5a045426e9834c1083837830191b43dd?format=webp&width=800&height=1200')",
+          backgroundImage: "/images/team pic 2.png",
           backgroundSize: "cover", backgroundPosition: "center", backgroundAttachment: "fixed",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.70) 100%)" }} />
