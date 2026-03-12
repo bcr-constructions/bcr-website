@@ -33,7 +33,7 @@ const HERO_SLIDES = [
     sub: "Custom interiors, kitchens, bathrooms, and full-home renovations crafted to your exact vision.",
     cta: "View Our Work",
     ctaHref: "#services",
-    image: "/images/slide-3.webp",
+    image: "/images/slide-7.webp",
   },
   {
     tag: "Heavy Construction",
@@ -49,7 +49,7 @@ const HERO_SLIDES = [
     sub: "First impressions matter. Our exterior renovation teams deliver curb appeal that lasts decades.",
     cta: "Get a Quote",
     ctaHref: "#contact",
-    image: "/images/slide-5.webp",
+    image: "/images/slide-3.webp",
   },
 ];
 
