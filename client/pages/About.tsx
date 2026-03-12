@@ -225,7 +225,7 @@ export default function About() {
         {/* Background image */}
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage:"url('/images/about us pic.png')",
+          backgroundImage:"/images/slide-6.webp",
           backgroundSize: "cover", backgroundPosition: "center 40%",
         }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(105deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.4) 100%)" }} />
