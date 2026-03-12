@@ -134,6 +134,13 @@ export default function About() {
           font-size: 16px; color: var(--muted); line-height: 1.8;
         }
 
+                /* ── responsive grids ── */
+        @media (max-width: 768px) {
+          .responsive-2col { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .responsive-form-grid { grid-template-columns: 1fr !important; }
+          .responsive-4col { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+
         /* ── stat card ── */
         .abt-stat {
           text-align: center; padding: 32px 20px;
@@ -243,7 +250,7 @@ export default function About() {
               <a href="#story" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 26px", borderRadius: 10, background: "var(--gold)", color: "var(--ink)", fontWeight: 700, fontSize: 14, textDecoration: "none", letterSpacing: "0.03em" }}>
                 Our Story <ArrowUpRight size={14} />
               </a>
-              <a href="#contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 10, border: "1.5px solid rgba(255,255,255,0.25)", color: "#fff", fontWeight: 600, fontSize: 14, textDecoration: "none" }}>
+              <a href="/#contact" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 10, border: "1.5px solid rgba(255,255,255,0.25)", color: "#fff", fontWeight: 600, fontSize: 14, textDecoration: "none" }}>
                 Get a Free Quote
               </a>
             </div>
@@ -268,7 +275,7 @@ export default function About() {
 
       {/* ── OUR STORY ────────────────────────────────────────────────── */}
       <section id="story" style={{ background: "#fff", padding: "96px clamp(24px,6vw,80px)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
+        <div className="responsive-2col" style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "center" }}>
 
           <Reveal>
             <div className="abt-eyebrow">Our Story</div>
@@ -350,7 +357,7 @@ export default function About() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px 72px" }}>
+          <div className="responsive-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px 72px" }}>
             {TIMELINE.map((item, i) => (
               <Reveal key={i} delay={i * 60}>
                 <div className="abt-tl-item" style={{ position: "relative", paddingLeft: 52, paddingBottom: 36 }}>
@@ -442,7 +449,7 @@ export default function About() {
               Whether you're planning a renovation, recovering from damage, or building from the ground up — BCR brings 24+ years of expertise, in-house crews, and a commitment to doing the job right.
             </p>
             <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-              <a href="#contact" style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "13px 28px", borderRadius: 10, background: "var(--gold)", color: "var(--ink)", fontWeight: 700, fontSize: 14, textDecoration: "none", letterSpacing: "0.03em" }}>
+              <a href="/#contact" style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "13px 28px", borderRadius: 10, background: "var(--gold)", color: "var(--ink)", fontWeight: 700, fontSize: 14, textDecoration: "none", letterSpacing: "0.03em" }}>
                 Get a Free Consultation <ArrowUpRight size={15} />
               </a>
               <Link to="/staff" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 26px", borderRadius: 10, border: "1.5px solid rgba(255,255,255,0.25)", color: "#fff", fontWeight: 600, fontSize: 14, textDecoration: "none" }}>
