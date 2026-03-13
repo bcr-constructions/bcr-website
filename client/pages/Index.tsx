@@ -154,12 +154,13 @@ export default function Index() {
     setFormStatus("success");
     setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "", message: "" });
   };
+
   const prev = () => setSlide(p => p === 0 ? HERO_SLIDES.length - 1 : p - 1);
   const next = () => setSlide(p => (p + 1) % HERO_SLIDES.length);
 
   useEffect(() => {
     if (autoPaused) return;
-    const id = setInterval(() => setSlide(p => (p + 1) % HERO_SLIDES.length), 5000);
+    const id = setInterval(() => setSlide(p => (p + 1) % HERO_SLIDES.length), 4000);
     return () => clearInterval(id);
   }, [autoPaused]);
 
