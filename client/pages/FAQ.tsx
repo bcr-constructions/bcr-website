@@ -279,21 +279,36 @@ export default function FAQ() {
           text-align: center; padding: 64px 24px;
           color: var(--muted); font-size: 15px;
         }
+
+        /* category pills on white background (FAQ body section) */
+        .faq-body-section .faq-cat-pill {
+          border-color: rgba(0,0,0,0.12);
+          color: rgba(0,0,0,0.45);
+        }
+        .faq-body-section .faq-cat-pill:hover {
+          border-color: rgba(201,168,76,0.5);
+          color: rgba(0,0,0,0.75);
+        }
+        .faq-body-section .faq-cat-pill.active {
+          background: var(--gold);
+          border-color: var(--gold);
+          color: var(--ink);
+        }
       `}</style>
 
       <Header />
 
       {/* ── HERO ─────────────────────────────────────────────────────── */}
       <section style={{ position: "relative", background: "var(--ink)", paddingTop: "var(--header-h, 102px)", overflow: "hidden" }}>
-       <div
-  style={{
-    position: "absolute",
-    inset: 0,
-    backgroundImage: "url('/images/faqs-pic.png')",
-    backgroundSize: "cover",
-    backgroundPosition: "center 60%",
-  }}
-/>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage: "url('/images/faqs-pic_png.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center 60%",
+          }}
+        />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,0.88) 0%, rgba(10,10,10,0.96) 100%)" }} />
         {/* Gold rule bottom */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 1.5, background: "linear-gradient(90deg, transparent, var(--gold) 30%, var(--gold) 70%, transparent)" }} />
@@ -346,7 +361,7 @@ export default function FAQ() {
       </section>
 
       {/* ── FAQ BODY ─────────────────────────────────────────────────── */}
-      <section style={{ background: "#fff", padding: "80px clamp(24px,6vw,80px) 96px" }}>
+      <section className="faq-body-section" style={{ background: "#fff", padding: "80px clamp(24px,6vw,80px) 96px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
 
           {/* Category filter */}
