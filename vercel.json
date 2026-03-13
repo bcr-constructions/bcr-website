@@ -1,8 +1,5 @@
 {
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "dist/spa",
+  "framework": "vite"
 }
