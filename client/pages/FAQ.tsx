@@ -304,7 +304,7 @@ export default function FAQ() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: "url('/images/faq-pic-1.webp')",
+            backgroundImage: "url('/images/faq-pic-1.webp')", 
             backgroundSize: "cover",
             backgroundPosition: "center 60%",
           }}
