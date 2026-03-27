@@ -72,7 +72,7 @@ const VALUES = [
 const FAQS = [
   {
     q: "Does BCR use subcontractors?",
-    a: "No. All work is performed by BCR's own in-house employees. This means consistent quality, direct accountability, and no middle-man surprises. The crew you meet on day one is the crew that finishes your project.",
+    a: "Yes, we work with subcontractors—carefully selected, highly experienced, and fully trusted professionals.",
   },
   {
     q: "How experienced is the BCR team?",
