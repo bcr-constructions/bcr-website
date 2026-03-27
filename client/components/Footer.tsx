@@ -5,7 +5,7 @@ import {
   ChevronRight, HardHat,
 } from "lucide-react";
 
-const BCR_LOGO = "/images/bcr-logo-9.png";
+const BCR_LOGO = "/images/bcr-logo-7.png";
 const SERVICES = [
   { name: "Commercial Restoration", path: "/services/commercial-restoration" },
   { name: "Condominium",            path: "/services/condominium" },
