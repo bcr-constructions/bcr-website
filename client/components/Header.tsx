@@ -43,16 +43,18 @@ const SERVICE_DESCRIPTIONS: Record<string, string> = {
   "Water Proofing":          "Keep moisture out for good with industry-leading waterproofing solutions.",
 };
 
-// BCR Constructions logo (transparent PNG)
 const BCR_LOGO = "/images/bcr-logo-9.png";
+
 export default function Header() {
   const [scrolled,            setScrolled]            = useState(false);
   const [servicesOpen,        setServicesOpen]        = useState(false);
   const [mobileOpen,          setMobileOpen]          = useState(false);
   const [mobileServicesOpen,  setMobileServicesOpen]  = useState(false);
   const [activeService,       setActiveService]       = useState(SERVICES[0]);
+  const [headerHeight,        setHeaderHeight]        = useState(102);
   const dropdownRef  = useRef<HTMLDivElement>(null);
   const closeTimer   = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const headerRef    = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -73,6 +75,18 @@ export default function Header() {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
+
+  // Measure actual header height so drawer always aligns perfectly
+  useEffect(() => {
+    const measure = () => {
+      if (headerRef.current) {
+        setHeaderHeight(headerRef.current.offsetHeight);
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   const openServices  = () => { clearTimeout(closeTimer.current!); setServicesOpen(true); };
   const closeServices = () => { closeTimer.current = setTimeout(() => setServicesOpen(false), 160); };
@@ -189,8 +203,6 @@ export default function Header() {
         .hdr-logo-img {
           height: 44px;
           width: auto;
-          /* Logo is white/silver on transparent — perfectly visible on dark bg */
-          /* Subtle gold tint on hover to match brand accent */
           filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4));
           transition: filter 0.3s var(--ease-out), transform 0.4s var(--ease-out), opacity 0.3s;
           opacity: 0.92;
@@ -429,32 +441,42 @@ export default function Header() {
 
         /* ── mobile overlay ── */
         .hdr-overlay {
-          position: fixed; inset: 0; z-index: 997;
-          background: rgba(0,0,0,0.7);
+          position: fixed; left: 0; right: 0; bottom: 0; z-index: 997;
+          background: rgba(0,0,0,0.65);
           opacity: 0; pointer-events: none;
           transition: opacity 0.35s;
           backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
         }
         .hdr-overlay.open { opacity: 1; pointer-events: all; }
 
         /* ── mobile drawer ── */
         .hdr-drawer {
-          position: fixed; top: 0; right: 0; bottom: 0; z-index: 998;
+          position: fixed; right: 0; bottom: 0; z-index: 998;
           width: min(360px, 92vw);
           background: var(--ink-3);
           border-left: 1px solid rgba(255,255,255,0.07);
+          border-top: 1px solid var(--gold-border);
           display: flex; flex-direction: column;
           transform: translateX(100%);
           transition: transform 0.38s var(--ease-out);
-          box-shadow: -20px 0 60px rgba(0,0,0,0.5);
+          box-shadow: -20px 0 60px rgba(0,0,0,0.6);
+          overflow-y: auto;
         }
         .hdr-drawer.open { transform: translateX(0); }
 
+        /* ── drawer close row ── */
         .hdr-drawer-head {
           display: flex; align-items: center; justify-content: space-between;
-          padding: 18px 22px;
+          padding: 14px 20px;
           border-bottom: 1px solid rgba(255,255,255,0.07);
           flex-shrink: 0;
+          background: rgba(0,0,0,0.2);
+        }
+        .hdr-drawer-label {
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          color: rgba(255,255,255,0.3);
         }
         .hdr-drawer-close {
           background: rgba(255,255,255,0.06); border: none; cursor: pointer;
@@ -533,14 +555,6 @@ export default function Header() {
         }
         .hdr-mob-cta:hover { background: var(--gold-lt); transform: translateY(-1px); }
 
-        /* ── drawer logo ── */
-        .hdr-drawer-logo {
-          height: 30px;
-          width: auto;
-          filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
-          opacity: 0.9;
-        }
-
         /* ── responsive ── */
         @media (max-width: 960px) {
           .hdr-links  { display: none; }
@@ -548,7 +562,7 @@ export default function Header() {
         }
       `}</style>
 
-      <div className="hdr">
+      <div className="hdr" ref={headerRef}>
 
         {/* ── Ticker ── */}
         <div className="hdr-ticker" aria-hidden="true">
@@ -684,29 +698,30 @@ export default function Header() {
         </nav>
       </div>
 
-      {/* ── Mobile Overlay ── */}
+      {/* ── Mobile Overlay — sits below header ── */}
       <div
         className={`hdr-overlay${mobileOpen ? " open" : ""}`}
+        style={{ top: headerHeight }}
         onClick={() => setMobileOpen(false)}
         aria-hidden="true"
       />
 
-      {/* ── Mobile Drawer ── */}
+      {/* ── Mobile Drawer — anchored below header ── */}
       <div
         className={`hdr-drawer${mobileOpen ? " open" : ""}`}
+        style={{ top: headerHeight }}
         role="dialog"
         aria-modal="true"
         aria-label="Mobile navigation"
       >
+        {/* Drawer header row — close button only, no logo needed */}
         <div className="hdr-drawer-head">
-          <Link to="/" onClick={() => setMobileOpen(false)} aria-label="BCR Constructions — Home">
-            <img
-              src={BCR_LOGO}
-              alt="BCR Constructions"
-              className="hdr-drawer-logo"
-            />
-          </Link>
-          <button className="hdr-drawer-close" onClick={() => setMobileOpen(false)} aria-label="Close">
+          <span className="hdr-drawer-label">Navigation</span>
+          <button
+            className="hdr-drawer-close"
+            onClick={() => setMobileOpen(false)}
+            aria-label="Close menu"
+          >
             <X size={18} />
           </button>
         </div>
@@ -726,7 +741,11 @@ export default function Header() {
             Services
             <ChevronDown
               size={16}
-              style={{ color: "var(--gold)", transition: "transform 0.3s", transform: mobileServicesOpen ? "rotate(180deg)" : "none" }}
+              style={{
+                color: "var(--gold)",
+                transition: "transform 0.3s",
+                transform: mobileServicesOpen ? "rotate(180deg)" : "none",
+              }}
             />
           </button>
 
