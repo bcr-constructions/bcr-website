@@ -44,7 +44,7 @@ const SERVICE_DESCRIPTIONS: Record<string, string> = {
 };
 
 // BCR Constructions logo (transparent PNG)
-const BCR_LOGO = "/images/bcr-logo-1.png";
+const BCR_LOGO = "/images/bcr-logo-0.png";
 export default function Header() {
   const [scrolled,            setScrolled]            = useState(false);
   const [servicesOpen,        setServicesOpen]        = useState(false);
