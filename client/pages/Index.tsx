@@ -96,7 +96,6 @@ const WHY_BCR = [
   "Single point of contact from quote to completion",
   "In-house crews — no subcontractor surprises",
   "Transparent pricing with written estimates",
-  "24/7 emergency response for water & fire damage",
   "Fully licensed, bonded & insured in New York",
   "12 specialized services under one roof",
 ];
