@@ -72,7 +72,7 @@ const VALUES = [
 const FAQS = [
   {
     q: "Does BCR use subcontractors?",
-    a: "Yes, we work with subcontractors which arecarefully selected, highly experienced, and fully trusted professionals.",
+    a: "Yes, we work with subcontractors which are carefully selected, highly experienced, and fully trusted professionals.",
   },
   {
     q: "How experienced is the BCR team?",
