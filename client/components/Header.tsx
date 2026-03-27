@@ -43,7 +43,7 @@ const SERVICE_DESCRIPTIONS: Record<string, string> = {
   "Water Proofing":          "Keep moisture out for good with industry-leading waterproofing solutions.",
 };
 
-const BCR_LOGO = "/images/bcr-logo-9.png";
+const BCR_LOGO = "/images/bcr-logo-7.png";
 
 export default function Header() {
   const [scrolled,            setScrolled]            = useState(false);
