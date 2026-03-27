@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import {
-  ChevronLeft, ChevronRight, Shield, Users, Leaf,
+  Shield, Users, Leaf,
   ArrowUpRight, Phone, Mail, MapPin, CheckCircle2,
   Building2, HardHat, Star, Quote, ChevronDown,
 } from "lucide-react";
@@ -134,7 +134,6 @@ function Section({ children, className = "" }: { children: React.ReactNode; clas
 export default function Index() {
   const [slide, setSlide] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [autoPaused, setAutoPaused] = useState(false);
 
   // Contact form state
   const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", service: "", message: "" });
@@ -154,14 +153,11 @@ export default function Index() {
     setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "", message: "" });
   };
 
-  const prev = () => setSlide(p => p === 0 ? HERO_SLIDES.length - 1 : p - 1);
-  const next = () => setSlide(p => (p + 1) % HERO_SLIDES.length);
-
+  // Auto-slide every 4 seconds — no manual controls
   useEffect(() => {
-    if (autoPaused) return;
     const id = setInterval(() => setSlide(p => (p + 1) % HERO_SLIDES.length), 4000);
     return () => clearInterval(id);
-  }, [autoPaused]);
+  }, []);
 
   return (
     <div style={{ fontFamily: "'Outfit', sans-serif", background: "#fff", overflowX: "hidden" }}>
@@ -232,19 +228,6 @@ export default function Index() {
           transition: border-color 0.25s, background 0.25s, color 0.25s;
         }
         .hero-cta-ghost:hover { border-color: var(--gold); background: rgba(201,168,76,0.1); color: var(--gold-lt); }
-
-        /* ── slide arrows ── */
-        .slide-arrow {
-          width: 52px; height: 52px; border-radius: 50%;
-          background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
-          color: #fff; display: flex; align-items: center; justify-content: center;
-          cursor: pointer; backdrop-filter: blur(10px);
-          transition: background 0.2s, border-color 0.2s, transform 0.2s;
-          position: absolute; top: 50%; transform: translateY(-50%); z-index: 30;
-        }
-        .slide-arrow:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); transform: translateY(-50%) scale(1.1); }
-        .slide-arrow-prev { left: clamp(16px, 3vw, 48px); }
-        .slide-arrow-next { right: clamp(16px, 3vw, 48px); }
 
         /* ── stats bar ── */
         .stat-val {
@@ -427,6 +410,12 @@ export default function Index() {
           border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .why-item:last-child { border-bottom: none; }
+
+        /* ── slide dot indicators ── */
+        .slide-dot {
+          height: 3px; border-radius: 4px; border: none; cursor: pointer; padding: 0;
+          transition: width 0.35s ease, background 0.35s ease;
+        }
       `}</style>
 
       <Header />
@@ -434,10 +423,7 @@ export default function Index() {
       {/* ── HERO ──────────────────────────────────────────────────────── */}
       <section
         style={{ position: "relative", height: "100vh", minHeight: 640, background: "#000", marginTop: 0, paddingTop: "var(--header-h, 102px)" }}
-        onMouseEnter={() => setAutoPaused(true)}
-        onMouseLeave={() => setAutoPaused(false)}
       >
-
         {HERO_SLIDES.map((s, i) => (
           <div
             key={i}
@@ -472,23 +458,17 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Arrows — left & right sides */}
-        <button className="slide-arrow slide-arrow-prev" onClick={prev} aria-label="Previous slide"><ChevronLeft size={22} /></button>
-        <button className="slide-arrow slide-arrow-next" onClick={next} aria-label="Next slide"><ChevronRight size={22} /></button>
-
-        {/* Indicators */}
+        {/* Dot Indicators only — no arrows */}
         <div style={{ position: "absolute", bottom: 48, right: "clamp(24px,6vw,96px)", zIndex: 20, display: "flex", gap: 8, alignItems: "center" }}>
           {HERO_SLIDES.map((_, i) => (
             <button
               key={i}
               onClick={() => setSlide(i)}
               aria-label={`Slide ${i + 1}`}
+              className="slide-dot"
               style={{
-                height: 3, borderRadius: 4, border: "none", cursor: "pointer",
                 background: i === slide ? "var(--gold)" : "rgba(255,255,255,0.3)",
                 width: i === slide ? 32 : 12,
-                transition: "width 0.35s, background 0.35s",
-                padding: 0,
               }}
             />
           ))}
