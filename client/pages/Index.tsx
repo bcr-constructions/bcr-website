@@ -3,9 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 import {
-  Shield, Users, Leaf,
+  Shield, Zap, Star,
   ArrowUpRight, Phone, Mail, MapPin, CheckCircle2,
-  Building2, HardHat, Star, Quote, ChevronDown,
+  Building2, HardHat, Quote, ChevronDown,
 } from "lucide-react";
 
 /* ─── DATA ──────────────────────────────────────────────────────────── */
@@ -72,9 +72,9 @@ const SERVICES = [
 ];
 
 const VALUES = [
-  { Icon: Shield,  title: "Safety First",     description: "Every BCR job site operates under rigorous safety protocols. Our crews are OSHA-certified, fully insured, and trained to put protection above all else — for workers and clients alike." },
-  { Icon: Users,   title: "Community Roots",  description: "BCR was built in New York, for New York. We hire locally, support neighborhood initiatives, and take pride in the lasting impact our work has on the communities we serve." },
-  { Icon: Leaf,    title: "Sustainability",   description: "From low-VOC materials to energy-efficient building systems, BCR integrates green practices into every phase of construction. Building better means building responsibly." },
+  { Icon: Shield, title: "Safety",     description: "Every BCR job site operates under rigorous safety protocols. Our crews are OSHA-certified, fully insured, and trained to put protection above all else — for workers and clients alike." },
+  { Icon: Zap,    title: "Innovation", description: "BCR stays at the forefront of modern construction methods, materials, and technology. We bring smarter, faster, and more efficient solutions to every project we undertake." },
+  { Icon: Star,   title: "Excellence", description: "Good enough is never good enough at BCR. We hold every project — no matter the scale — to the same uncompromising standard of craftsmanship that has defined our reputation for 24+ years." },
 ];
 
 const TESTIMONIALS = [
@@ -135,7 +135,6 @@ export default function Index() {
   const [slide, setSlide] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  // Contact form state
   const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", service: "", message: "" });
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
@@ -147,13 +146,11 @@ export default function Index() {
     e.preventDefault();
     if (!formData.firstName || !formData.email || !formData.phone) return;
     setFormStatus("submitting");
-    // Replace with your real API/email endpoint
     await new Promise(res => setTimeout(res, 1200));
     setFormStatus("success");
     setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "", message: "" });
   };
 
-  // Auto-slide every 4 seconds — no manual controls
   useEffect(() => {
     const id = setInterval(() => setSlide(p => (p + 1) % HERO_SLIDES.length), 4000);
     return () => clearInterval(id);
@@ -178,7 +175,6 @@ export default function Index() {
           --ease:     cubic-bezier(0.22,1,0.36,1);
         }
 
-        /* ── hero ── */
         .hero-tag {
           display: inline-flex; align-items: center; gap: 8px;
           font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
@@ -229,14 +225,12 @@ export default function Index() {
         }
         .hero-cta-ghost:hover { border-color: var(--gold); background: rgba(201,168,76,0.1); color: var(--gold-lt); }
 
-        /* ── stats bar ── */
         .stat-val {
           font-family: 'Playfair Display', serif;
           font-size: clamp(34px, 4vw, 52px); font-weight: 700;
           color: var(--gold); line-height: 1;
         }
 
-        /* ── section headers ── */
         .sec-eyebrow {
           font-size: 10.5px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
           color: var(--gold); display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
@@ -253,7 +247,6 @@ export default function Index() {
         .sec-lead { font-size: 17px; color: var(--muted); line-height: 1.7; max-width: 520px; }
         .sec-lead-light { color: rgba(255,255,255,0.6); }
 
-        /* ── service card ── */
         .svc-card {
           background: #fff; border-radius: 16px; overflow: hidden;
           border: 1px solid var(--border);
@@ -292,7 +285,6 @@ export default function Index() {
         }
         .svc-card:hover .svc-card-link { gap: 9px; }
 
-        /* ── value card ── */
         .val-card {
           padding: 36px 32px; border-radius: 18px;
           border: 1px solid var(--border); background: #fff;
@@ -317,7 +309,6 @@ export default function Index() {
         }
         .val-card:hover .val-icon { background: var(--gold); color: var(--ink); }
 
-        /* ── testimonial ── */
         .testi-card {
           background: var(--ink-3); border-radius: 18px;
           padding: 32px 28px; border: 1px solid rgba(255,255,255,0.07);
@@ -330,7 +321,6 @@ export default function Index() {
         .testi-name { font-size: 14px; font-weight: 600; color: #fff; }
         .testi-role { font-size: 12px; color: var(--gold); letter-spacing: 0.04em; }
 
-        /* ── FAQ ── */
         .faq-item {
           border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
           transition: border-color 0.25s, box-shadow 0.25s;
@@ -354,7 +344,6 @@ export default function Index() {
           padding-top: 16px;
         }
 
-        /* ── contact ── */
         .contact-input {
           width: 100%; padding: 13px 16px; border-radius: 10px;
           border: 1.5px solid rgba(255,255,255,0.12);
@@ -364,7 +353,6 @@ export default function Index() {
         }
         .contact-input::placeholder { color: rgba(255,255,255,0.35); }
         .contact-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.09); }
-
         .contact-select option { background: #1a1a1a; color: #fff; }
 
         .contact-submit {
@@ -395,14 +383,12 @@ export default function Index() {
           color: var(--gold); flex-shrink: 0; margin-top: 1px;
         }
 
-        /* ── responsive grids ── */
         @media (max-width: 768px) {
           .responsive-2col { grid-template-columns: 1fr !important; gap: 40px !important; }
           .responsive-form-grid { grid-template-columns: 1fr !important; }
           .hero-title { font-size: clamp(36px, 10vw, 60px) !important; }
         }
 
-        /* ── why bcr checklist ── */
         .why-item {
           display: flex; align-items: center; gap: 12px;
           font-size: 14.5px; font-weight: 500; color: rgba(255,255,255,0.8);
@@ -411,7 +397,6 @@ export default function Index() {
         }
         .why-item:last-child { border-bottom: none; }
 
-        /* ── slide dot indicators ── */
         .slide-dot {
           height: 3px; border-radius: 4px; border: none; cursor: pointer; padding: 0;
           transition: width 0.35s ease, background 0.35s ease;
@@ -421,9 +406,7 @@ export default function Index() {
       <Header />
 
       {/* ── HERO ──────────────────────────────────────────────────────── */}
-      <section
-        style={{ position: "relative", height: "100vh", minHeight: 640, background: "#000", marginTop: 0, paddingTop: "var(--header-h, 102px)" }}
-      >
+      <section style={{ position: "relative", height: "100vh", minHeight: 640, background: "#000", marginTop: 0, paddingTop: "var(--header-h, 102px)" }}>
         {HERO_SLIDES.map((s, i) => (
           <div
             key={i}
@@ -439,7 +422,6 @@ export default function Index() {
           </div>
         ))}
 
-        {/* Slide content */}
         <div style={{ position: "relative", zIndex: 10, height: "100%", display: "flex", alignItems: "center", padding: "0 clamp(24px, 6vw, 96px)" }}>
           <div style={{ maxWidth: 640 }}>
             <div className="hero-tag">{HERO_SLIDES[slide].tag}</div>
@@ -458,7 +440,6 @@ export default function Index() {
           </div>
         </div>
 
-        {/* Dot Indicators only — no arrows */}
         <div style={{ position: "absolute", bottom: 48, right: "clamp(24px,6vw,96px)", zIndex: 20, display: "flex", gap: 8, alignItems: "center" }}>
           {HERO_SLIDES.map((_, i) => (
             <button
@@ -474,7 +455,6 @@ export default function Index() {
           ))}
         </div>
 
-        {/* Slide count */}
         <div style={{ position: "absolute", bottom: 40, left: "50%", transform: "translateX(-50%)", zIndex: 20, color: "rgba(255,255,255,0.4)", fontSize: 12, letterSpacing: "0.1em", fontWeight: 500 }}>
           {String(slide + 1).padStart(2, "0")} / {String(HERO_SLIDES.length).padStart(2, "0")}
         </div>
@@ -521,7 +501,8 @@ export default function Index() {
               ))}
             </div>
             <div style={{ marginTop: 36, display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <a href="/about" style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "12px 26px", borderRadius: 10, background: "var(--ink)", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none", letterSpacing: "0.03em", transition: "background 0.2s" }}
+              <a href="/about"
+                style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "12px 26px", borderRadius: 10, background: "var(--ink)", color: "#fff", fontSize: 14, fontWeight: 600, textDecoration: "none", letterSpacing: "0.03em", transition: "background 0.2s" }}
                 onMouseEnter={e => (e.currentTarget.style.background = "#333")}
                 onMouseLeave={e => (e.currentTarget.style.background = "var(--ink)")}
               >
@@ -541,7 +522,6 @@ export default function Index() {
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
               <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 50%)" }} />
-              {/* Floating badge */}
               <div style={{
                 position: "absolute", bottom: 24, left: 24, right: 24,
                 background: "rgba(10,10,10,0.85)", backdropFilter: "blur(12px)",
@@ -717,14 +697,12 @@ export default function Index() {
 
       {/* ── CONTACT ───────────────────────────────────────────────────── */}
       <section id="contact" style={{ background: "var(--ink)", padding: "96px clamp(24px,6vw,96px)", position: "relative", overflow: "hidden" }}>
-        {/* Decorative glow */}
         <div style={{ position: "absolute", top: -100, right: -100, width: 500, height: 500, background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: -100, left: -100, width: 400, height: 400, background: "radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%)", pointerEvents: "none" }} />
 
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <div className="responsive-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }}>
 
-            {/* Left */}
             <Section>
               <div className="sec-eyebrow">Free Consultation</div>
               <h2 className="sec-title sec-title-light">Ready to Build?<br />Let's Talk.</h2>
@@ -763,7 +741,6 @@ export default function Index() {
                 </div>
               </div>
 
-              {/* Why BCR checklist */}
               <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, padding: "22px 24px" }}>
                 {WHY_BCR.map((item, i) => (
                   <div key={i} className="why-item">
@@ -774,7 +751,6 @@ export default function Index() {
               </div>
             </Section>
 
-            {/* Right — Form */}
             <Section>
               <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 20, padding: "40px 36px", backdropFilter: "blur(8px)" }}>
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, fontWeight: 600, color: "#fff", marginBottom: 6 }}>Get a Free Quote</h3>
@@ -790,45 +766,45 @@ export default function Index() {
                     <button onClick={() => setFormStatus("idle")} style={{ fontSize: 13, color: "var(--gold)", background: "none", border: "none", cursor: "pointer", textDecoration: "underline" }}>Submit another request</button>
                   </div>
                 ) : (
-                <form onSubmit={handleFormSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                  <div className="responsive-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                    <input className="contact-input" type="text" name="firstName" placeholder="First Name *" value={formData.firstName} onChange={handleFormChange} required />
-                    <input className="contact-input" type="text" name="lastName"  placeholder="Last Name"    value={formData.lastName}  onChange={handleFormChange} />
-                  </div>
-                  <input className="contact-input" type="email" name="email" placeholder="Email Address *" value={formData.email} onChange={handleFormChange} required />
-                  <input className="contact-input" type="tel"   name="phone" placeholder="Phone Number *"  value={formData.phone} onChange={handleFormChange} required />
-                  <select className="contact-input contact-select" name="service" value={formData.service} onChange={handleFormChange}>
-                    <option value="" disabled>Type of Service</option>
-                    <option>Commercial Restoration</option>
-                    <option>Condominium</option>
-                    <option>Exterior Renovation</option>
-                    <option>Flooded Basement</option>
-                    <option>Home Design</option>
-                    <option>Home Renovation</option>
-                    <option>Insurance Claim</option>
-                    <option>Interior Renovation</option>
-                    <option>Kitchen & Bathroom</option>
-                    <option>New / Custom Home</option>
-                    <option>Roofing</option>
-                    <option>Water Proofing</option>
-                    <option>Other / Not Sure</option>
-                  </select>
-                  <textarea
-                    className="contact-input"
-                    name="message"
-                    rows={4}
-                    placeholder="Tell us about your project — location, scope, timeline..."
-                    value={formData.message}
-                    onChange={handleFormChange}
-                    style={{ resize: "vertical" }}
-                  />
-                  <button className="contact-submit" type="submit" disabled={formStatus === "submitting"}>
-                    <span>{formStatus === "submitting" ? "Sending…" : "Send My Request →"}</span>
-                  </button>
-                  <p style={{ fontSize: 11.5, color: "rgba(255,255,255,0.3)", textAlign: "center", lineHeight: 1.6 }}>
-                    By submitting you agree to be contacted by BCR Constructions regarding your inquiry. We never share your information.
-                  </p>
-                </form>
+                  <form onSubmit={handleFormSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                    <div className="responsive-form-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                      <input className="contact-input" type="text" name="firstName" placeholder="First Name *" value={formData.firstName} onChange={handleFormChange} required />
+                      <input className="contact-input" type="text" name="lastName"  placeholder="Last Name"    value={formData.lastName}  onChange={handleFormChange} />
+                    </div>
+                    <input className="contact-input" type="email" name="email" placeholder="Email Address *" value={formData.email} onChange={handleFormChange} required />
+                    <input className="contact-input" type="tel"   name="phone" placeholder="Phone Number *"  value={formData.phone} onChange={handleFormChange} required />
+                    <select className="contact-input contact-select" name="service" value={formData.service} onChange={handleFormChange}>
+                      <option value="" disabled>Type of Service</option>
+                      <option>Commercial Restoration</option>
+                      <option>Condominium</option>
+                      <option>Exterior Renovation</option>
+                      <option>Flooded Basement</option>
+                      <option>Home Design</option>
+                      <option>Home Renovation</option>
+                      <option>Insurance Claim</option>
+                      <option>Interior Renovation</option>
+                      <option>Kitchen & Bathroom</option>
+                      <option>New / Custom Home</option>
+                      <option>Roofing</option>
+                      <option>Water Proofing</option>
+                      <option>Other / Not Sure</option>
+                    </select>
+                    <textarea
+                      className="contact-input"
+                      name="message"
+                      rows={4}
+                      placeholder="Tell us about your project — location, scope, timeline..."
+                      value={formData.message}
+                      onChange={handleFormChange}
+                      style={{ resize: "vertical" }}
+                    />
+                    <button className="contact-submit" type="submit" disabled={formStatus === "submitting"}>
+                      <span>{formStatus === "submitting" ? "Sending…" : "Send My Request →"}</span>
+                    </button>
+                    <p style={{ fontSize: 11.5, color: "rgba(255,255,255,0.3)", textAlign: "center", lineHeight: 1.6 }}>
+                      By submitting you agree to be contacted by BCR Constructions regarding your inquiry. We never share your information.
+                    </p>
+                  </form>
                 )}
               </div>
             </Section>
