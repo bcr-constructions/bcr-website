@@ -53,7 +53,6 @@ const DIFFERENTIATORS = [
   "Single point of contact from quote to completion",
   "In-house crews — no subcontractor surprises",
   "Transparent, itemized written estimates",
-  "24/7 emergency response for water & fire damage",
   "Fully licensed, bonded & insured in New York",
   "12 specialized services under one roof",
   "Serving both residential and commercial clients",
