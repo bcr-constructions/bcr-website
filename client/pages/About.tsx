@@ -46,7 +46,7 @@ const VALUES = [
   { Icon: Leaf,    title: "Built Responsibly",      body: "From low-VOC materials to energy-efficient systems, BCR integrates sustainable practices into every phase of construction. Building better means building responsibly." },
   { Icon: Award,   title: "Uncompromised Quality",  body: "We don't cut corners — ever. Every project gets the same attention to detail whether it's a bathroom remodel or a full commercial build." },
   { Icon: Clock,   title: "On Time, Every Time",    body: "We know your time is valuable. BCR works to defined timelines, communicates proactively, and holds itself accountable to every deadline we set." },
-  { Icon: HardHat, title: "In-House Expertise",     body: "No subcontractor surprises. Our in-house crews handle every trade — which means tighter quality control, faster communication, and full accountability." },
+  { Icon: HardHat, title: "In-House Expertise",     body: "We work with trusted subcontractors to ensure quality, clear communication, and full accountability." },
 ];
 
 const DIFFERENTIATORS = [
