@@ -240,7 +240,7 @@ export default function ServiceDetail() {
     { question: "How long does a typical project take?", answer: "Project duration depends on the scope of work. We'll provide a detailed, written timeline during your free on-site consultation — and we hold ourselves to it." },
     { question: "Do you work with insurance claims?", answer: "Yes. BCR offers a fully managed insurance claim service. We document damage, interface directly with your insurer, provide restoration estimates, and execute the work — minimizing your stress throughout." },
     { question: "Are you licensed and insured?", answer: "Absolutely. BCR Constructions is fully licensed in New York, carries comprehensive general liability insurance, and all crew members are covered under workers' compensation." },
-    { question: "Do you use subcontractors?", answer: "No. All BCR work is performed by our own in-house crews — the same team from start to finish. This means consistent quality, direct accountability, and no subcontractor surprises." },
+    { question: "Do you use subcontractors?", answer: "Yes, we work with subcontractors which are carefully selected, highly experienced, and fully trusted professionals." },
   ];
 
   return (
